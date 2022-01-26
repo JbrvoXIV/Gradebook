@@ -1,5 +1,3 @@
-/* This is part of the starter code! 
- * You need to complete this class yourself!*/
 package main;
 import util.*;
 import java.util.*;
@@ -20,14 +18,16 @@ public class Main {
         Pattern p;
         Matcher m;
 
+        // WELCOME MESSAGE
         System.out.print(
             "************************************************************************************\n"
-            + "Welcome to my grade book!\n"
+            + "Welcome to my grade book!\n\n"
             + "Please enter the information of the first student using the following format:\n" 
             + "\"firstName lastName PID grade\".\n"
             + "Press Enter when you are done.\n\n"
         );
 
+        // ADD STUDENTS UNTIL "DONE" IS INPUTTED
         while (true) {
             try {
                 // READ STUDENTS
@@ -67,7 +67,8 @@ public class Main {
                 // ADD STUDENT TO LIST
                 studentList.add(new Student(firstName, lastName, pantherID, new Grade(parsedInt)));
                 
-            } 
+            }
+            // CATCH ERRORS FROM USERINPUT
             catch (Exception e) {
                 System.out.print(
                     "\nEntered information wrong!\n"
@@ -75,10 +76,11 @@ public class Main {
                     + "\"firstName lastName PID grade\"\n"
                     );
                 }
+            // PRINT OUT MENU UNTIL USER IS INPUTS "DONE"
             System.out.print(
                 "\n************************************************************************************\n"
                 + "Please enter the information of the next student using the same format.\n"
-                + "If there is no more students, please enter the keyword DONE.\n"
+                + "If there is no more students, please enter the keyword \"DONE\".\n"
                 + "Press Enter when you are done.\n\n"
             );
         }
@@ -108,8 +110,12 @@ public class Main {
                 + "(14) Quit the program\n\n"
             );
             try {
+
+                // USER ENTERS THEIR CHOICE
                 System.out.print("Enter your choice: ");
                 userChoice = input.nextInt();
+
+                // EXECUTE GRADEBOOK METHOD BASED ON USERCHOICE
                 switch (userChoice) {
                     case 1:
                         gradebook.getMaxScore();
@@ -163,7 +169,9 @@ public class Main {
                         System.out.println("\nClosing Gradebook...\n");
                         break;
                 }
-            } catch(Exception e) {
+            } 
+            // CATCH ERRORS FROM USERCHOICE INPUT
+            catch(Exception e) {
                 System.out.println("\nYou entered the information incorrectly!\n");
             }
         } while (userChoice != 14);

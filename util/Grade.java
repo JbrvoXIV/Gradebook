@@ -1,15 +1,16 @@
-/* This is part of the starter code! 
- * You need to complete this class yourself!*/
 package util;
 
 public class Grade {
     private int score;
     private String letterGrade;
 
+    // CONSTRUCTOR
     public Grade (int score) {
         this.score = score;
         calculateLetterGrade(score);
     }
+
+    // SETTERS AND GETTERS BELOW
 
     public int getScore() {
         return score;
@@ -28,6 +29,7 @@ public class Grade {
         this.letterGrade = letterGrade;
     }
 
+    // CALCULATE LETTER GRADE BASED ON INITIAL SCORE INPUTTED BY USER
     private void calculateLetterGrade(int score) {
         if (score >= 90) {
             this.letterGrade = "A";

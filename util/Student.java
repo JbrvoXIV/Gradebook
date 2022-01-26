@@ -1,5 +1,3 @@
-/* This is part of the starter code! 
- * You need to complete this class yourself!*/
 package util;
 
 public class Student {
@@ -8,12 +6,15 @@ public class Student {
     private int pid;
     private Grade grade;
 
+    // CONSTRUCTOR
     public Student(String firstName, String lastName, int pid, Grade grade) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pid = pid;
         this.grade = grade;
     }
+
+    // SETTERS AND GETTERS BELOW
 
     public String getFirstName() {
         return firstName;
