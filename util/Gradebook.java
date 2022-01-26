@@ -30,7 +30,7 @@ public class Gradebook {
 			scores.add(s.getGrade().getScore());
 		}
 		Collections.sort(scores);
-		System.out.println("\nMAX SCORE: " + scores.get(0));
+		System.out.println("\nMIN SCORE: " + scores.get(0));
 	}
 
 	// PRINT MAX LETTER GRADE OF ALL STUDENTS
