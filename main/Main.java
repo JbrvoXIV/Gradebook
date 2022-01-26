@@ -21,7 +21,8 @@ public class Main {
         Matcher m;
 
         System.out.print(
-            "Welcome to my grade book!\n"
+            "************************************************************************************\n"
+            + "Welcome to my grade book!\n"
             + "Please enter the information of the first student using the following format:\n" 
             + "\"firstName lastName PID grade\".\n"
             + "Press Enter when you are done.\n\n"
@@ -29,66 +30,143 @@ public class Main {
 
         while (true) {
             try {
+                // READ STUDENTS
                 userInput = input.nextLine();
-                if (userInput.compareTo("DONE") == 0) {
+                if (userInput.toUpperCase().compareTo("DONE") == 0) {
                     break;
                 }
                 String[] userInputSplit = userInput.split(" ");
                 
+                // ASSIGN FIRST NAME
                 firstName = userInputSplit[0];
                 if (Character.isLowerCase(firstName.charAt(0))) {
                     throw new Exception();
                 }
 
+                // ASSIGN LAST NAME
                 lastName = userInputSplit[1];
-                p = Pattern.compile("[a-zA-Z]+[.]{2,}[0-9]?");
+                p = Pattern.compile("[a-zA-Z]+[.]?");
                 m = p.matcher(lastName);
-                if (Character.isLowerCase(lastName.charAt(0)) || m.lookingAt()) {
+                if (Character.isLowerCase(lastName.charAt(0)) || !(m.matches())) {
                     throw new Exception();
                 }
                 
+                // ASSIGN PANTHER ID
                 if (userInputSplit[2].charAt(0) == '0' || userInputSplit[2].length() != 7) {
                     throw new Exception();
                 }
                 parsedInt = Integer.parseInt(userInputSplit[2]);
                 pantherID = parsedInt;
                 
+                // ASSIGN GRADE SCORE
                 parsedInt = Integer.parseInt(userInputSplit[3]);
                 if (parsedInt < 0 || parsedInt > 100) {
                     throw new Exception();
                 }
                 
+                // ADD STUDENT TO LIST
                 studentList.add(new Student(firstName, lastName, pantherID, new Grade(parsedInt)));
                 
             } 
             catch (Exception e) {
-                System.out.printf(
-                    "Entered information wrong!\n"
+                System.out.print(
+                    "\nEntered information wrong!\n"
                     + "Correct format is:\n"
-                    + "\"firstName lastName PID grade\"\n\n"
+                    + "\"firstName lastName PID grade\"\n"
                     );
                 }
-            System.out.printf(
-                "\nPlease enter the information of the next student using the same format.\n"
+            System.out.print(
+                "\n************************************************************************************\n"
+                + "Please enter the information of the next student using the same format.\n"
                 + "If there is no more students, please enter the keyword DONE.\n"
                 + "Press Enter when you are done.\n\n"
             );
         }
 
+        // ADD STUDENTS TO GRADEBOOK
         Gradebook gradebook = new Gradebook(studentList);
+
         
-        gradebook.calculateAvgLetter();
-        gradebook.calculateAvgScore();
-        gradebook.calculateMedianLetter();
-        gradebook.calculateMedianScore();
-        gradebook.findStudentLetterGrade(6337381);
-        gradebook.findStudentName(6337381);
-        gradebook.getMaxLetter();
-        gradebook.getMaxScore();
-        gradebook.getMinLetter();
-        gradebook.getMinScore();
-        gradebook.printAllStudentsLetterGrade();
-        gradebook.printAllStudentsScores();
+        int userChoice = 0;
+        do {
+            System.out.print(
+                "\n************************************************************************************\n"
+                + "\nPlease enter a new command:\n\n"
+                + "(1) Max Score\n"
+                + "(2) Min Score\n"
+                + "(3) Max Letter Grade\n"
+                + "(4) Min Letter Grade\n"
+                + "(5) Find students letter grade with pantherID\n"
+                + "(6) Find students name with pantherID\n"
+                + "(7) Change student's grade\n"
+                + "(8) Average Score\n"
+                + "(9) Average Letter Grade\n"
+                + "(10) Median Score\n"
+                + "(11) Median Letter Grade\n"
+                + "(12) Print students with scores in a tab-separated table\n"
+                + "(13) Print students with letter grades in a tab-separated table\n"
+                + "(14) Quit the program\n\n"
+            );
+            try {
+                System.out.print("Enter your choice: ");
+                userChoice = input.nextInt();
+                switch (userChoice) {
+                    case 1:
+                        gradebook.getMaxScore();
+                        break;
+                    case 2:
+                        gradebook.getMinScore();
+                        break;
+                    case 3:
+                        gradebook.getMaxLetter();
+                        break;
+                    case 4:
+                        gradebook.getMinLetter();
+                        break;
+                    case 5:
+                        System.out.println("\nPlease input the pantherID of the student\n");
+                        userInput = input.next();
+                        gradebook.findStudentLetterGrade(Integer.parseInt(userInput));
+                        break;
+                    case 6:
+                        System.out.println("\nPlease input the pantherID of the student\n");
+                        userInput = input.next();
+                        gradebook.findStudentName(Integer.parseInt(userInput));
+                        break;
+                    case 7:
+                        System.out.println("\nPlease input the pantherID and grade you wish to change to in the format \"pantherID (0-100)\"\n");
+                        input.nextLine();
+                        userInput = input.nextLine();
+                        gradebook.changeGrade(Integer.parseInt(userInput.split(" ")[0]), Integer.parseInt(userInput.split(" ")[1]));
+                        break;
+                    case 8:
+                        gradebook.getAvgScore();
+                        break;
+                    case 9:
+                        gradebook.getAvgLetter();
+                        break;
+                    case 10:
+                        gradebook.getMedianScore();
+                        break;
+                    case 11:
+                        gradebook.getMedianLetter();
+                        break;
+                    case 12:
+                        gradebook.printAllStudentsScores();
+                        System.out.println();
+                        break;
+                    case 13:
+                        gradebook.printAllStudentsLetterGrade();
+                        System.out.println();
+                        break;
+                    case 14:
+                        System.out.println("\nClosing Gradebook...\n");
+                        break;
+                }
+            } catch(Exception e) {
+                System.out.println("\nYou entered the information incorrectly!\n");
+            }
+        } while (userChoice != 14);
 
         input.close();
     }
