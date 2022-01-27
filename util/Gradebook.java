@@ -39,18 +39,43 @@ public class Gradebook {
 		for (Student s : this.listOfStudents) {
 			gradeLetters.add(s.getGrade().getLetterGrade());
 		}
-		gradeLetters.stream().sorted().collect(Collectors.toList());
-		System.out.println("\nMAX LETTER GRADE: " + gradeLetters.get(0));
+
+		/*
+		MAP AND CONCAT AN "," TO LETTER GRADES WITH NO + OR - SINCE "," IS IN BETWEEN THEM IN ASCII TABLE, ALLOWING FOR ACCURATE SORTING OF GRADES.
+		ARRAYLIST IS THEN SORTED AND MAPPED TO REPLACE THE "," IN THE LETTERS. A LIST IS RETURNED AND THE VALUE AT INDEX 0 IS THE HIGHEST GRADE.
+		*/
+		List<String> newArr = gradeLetters.stream()
+											.map(i -> {
+												return !i.contains("+") && !i.contains("-") ? i + "," : i;
+											})
+											.sorted()
+											.map(i -> i.replace(",", ""))
+											.collect(Collectors.toList());
+
+		System.out.println("\nMAX LETTER GRADE: " + newArr.get(0));
 	}
 
 	// PRINT MIN LETTER GRADE OF ALL STUDENTS
 	public void getMinLetter() {
 		ArrayList<String> gradeLetters = new ArrayList<>();
+		
 		for (Student s : this.listOfStudents) {
 			gradeLetters.add(s.getGrade().getLetterGrade());
 		}
-		gradeLetters.stream().sorted().collect(Collectors.toList());
-		System.out.println("\nMIN LETTER GRADE: " + gradeLetters.get(gradeLetters.size() - 1));
+
+		/*
+		MAP AND CONCAT AN "," TO LETTER GRADES WITH NO + OR - SINCE "," IS IN BETWEEN THEM IN ASCII TABLE, ALLOWING FOR ACCURATE SORTING OF GRADES.
+		ARRAYLIST IS THEN SORTED AND MAPPED TO REPLACE THE "," IN THE LETTERS. A LIST IS RETURNED AND THE VALUE AT THE END IS THE LOWEST GRADE.
+		*/
+		List<String> newArr = gradeLetters.stream()
+											.map(i -> {
+												return !i.contains("+") && !i.contains("-") ? i + "," : i;
+											})
+											.sorted()
+											.map(i -> i.replace(",", ""))
+											.collect(Collectors.toList());
+
+		System.out.println("\nMIN LETTER GRADE: " + newArr.get(newArr.size() - 1));
 	}
 
 	// FIND AND PRINT LETTER GRADE OF STUDENT THROUGH PANTHERID
