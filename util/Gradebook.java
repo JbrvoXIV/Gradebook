@@ -79,7 +79,7 @@ public class Gradebook {
 		double sum = 0;
 		for(Student s: listOfStudents)
 			sum += s.getGrade().getScore();
-		System.out.println("\nAVERAGE SCORE: " + sum / listOfStudents.size());
+		System.out.printf("\nAVERAGE SCORE: %.2f\n", sum / listOfStudents.size());
 	}
 	
 	// PRINT THE AVERAGE LETTER SCORE OF ALL STUDENT GRADES
@@ -100,9 +100,9 @@ public class Gradebook {
 			scores[i++] = s.getGrade().getScore();
 		Arrays.sort(scores);
 		if (n % 2 == 0)
-			 System.out.println("\nMEDIAN SCORE: " + (scores[n / 2] + scores[n / 2 - 1]) / 2.0);
+			 System.out.printf("\nMEDIAN SCORE: %.2f\n" + (scores[n / 2] + scores[n / 2 - 1]) / 2.0);
 		else
-			System.out.println("\nMEDIAN SCORE: " + scores[n / 2]);
+			System.out.printf("\nMEDIAN SCORE: %.2f\n" + scores[n / 2]);
     }
 
 	// PRINT THE MEDIAN LETTER GRADE OF ALL STUDENT GRADES
