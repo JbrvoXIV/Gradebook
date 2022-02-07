@@ -125,9 +125,9 @@ public class Gradebook {
 			scores[i++] = s.getGrade().getScore();
 		Arrays.sort(scores);
 		if (n % 2 == 0)
-			 System.out.printf("\nMEDIAN SCORE: %.2f\n" + (scores[n / 2] + scores[n / 2 - 1]) / 2.0);
+			 System.out.printf("\nMEDIAN SCORE: %.2f\n", (scores[n / 2] + scores[n / 2 - 1]) / 2.0);
 		else
-			System.out.printf("\nMEDIAN SCORE: %.2f\n" + scores[n / 2]);
+			System.out.printf("\nMEDIAN SCORE: %.2f\n", scores[n / 2]);
     }
 
 	// PRINT THE MEDIAN LETTER GRADE OF ALL STUDENT GRADES
